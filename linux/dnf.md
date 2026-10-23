@@ -2,9 +2,9 @@ How to Enable Postgres repository
 =====================================
 
 
-  #dnf repolist --all
-  #dnf config-manager --set-enabled Company_name_PostgreSQL_PGSQL18_RHEL9
-  #dnf repolist --all
+  dnf repolist --all
+  dnf config-manager --set-enabled Company_name_PostgreSQL_PGSQL18_RHEL9
+  dnf repolist --all
 
 
 # DNF Package Management Notes

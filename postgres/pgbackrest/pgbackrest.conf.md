@@ -1,8 +1,8 @@
 # ============================================================
-# pgBackRest Configuration
-# Environment : PostgreSQL 18
-# Stanza      : pg18lab
-# Purpose     : Production-style baseline
+# pgBackRest Configuration - Example
+# PostgreSQL Version : 18
+# Stanza             : pg18lab
+# Purpose            : Production-style reference
 # ============================================================
 
 
@@ -13,7 +13,7 @@
 [pg18lab]
 
 # PostgreSQL data directory
-pg1-path=/pgdata/18/data
+pg1-path=/postgres/data/pg18
 
 # PostgreSQL port
 pg1-port=5432
@@ -30,18 +30,21 @@ pg1-port=5432
 # Repository
 # ------------------------------------------------------------
 
-# Backup repository location
-repo1-path=/pgbackup/pgbackrest
+# pgBackRest repository location
+repo1-path=/postgres/backup/pg18
 
 
 # ------------------------------------------------------------
 # Retention
 # ------------------------------------------------------------
 
-# Number of FULL backup chains to retain
-repo1-retention-full=4
+# Time-based retention policy
+repo1-retention-full-type=time
 
-# Keep backup history metadata
+# Keep approximately 14 days of full-backup recovery history
+repo1-retention-full=14
+
+# Keep backup history metadata for reporting/reference
 repo1-retention-history=365
 
 
@@ -49,10 +52,10 @@ repo1-retention-history=365
 # Compression
 # ------------------------------------------------------------
 
-# Zstandard compression
+# Use Zstandard compression
 compress-type=zst
 
-# Compression level
+# Balanced compression level
 compress-level=3
 
 
@@ -60,10 +63,10 @@ compress-level=3
 # Performance
 # ------------------------------------------------------------
 
-# Number of parallel processes
+# Maximum parallel worker processes for backup/restore
 process-max=4
 
-# Force fast checkpoint before backup starts
+# Force a checkpoint so backup can start quickly
 start-fast=y
 
 
@@ -71,13 +74,13 @@ start-fast=y
 # Logging
 # ------------------------------------------------------------
 
-# Console logging level
+# Console logging
 log-level-console=info
 
-# File logging level
+# Detailed file logging
 log-level-file=detail
 
-# Log directory
+# pgBackRest log directory
 log-path=/var/log/pgbackrest
 
 
@@ -85,10 +88,10 @@ log-path=/var/log/pgbackrest
 # Timeouts
 # ------------------------------------------------------------
 
-# Database timeout
+# Maximum time allowed for database operations
 db-timeout=1800
 
-# Protocol timeout
+# Maximum protocol timeout
 protocol-timeout=3600
 
 
@@ -96,18 +99,18 @@ protocol-timeout=3600
 # WAL Archiving
 # ------------------------------------------------------------
 
-# Enable asynchronous WAL archiving
+# Enable asynchronous WAL archive processing
 archive-async=y
 
-# Spool location used for async archiving
+# Queue/spool directory used by async archive-push/archive-get
 spool-path=/var/spool/pgbackrest
 
 
 # ============================================================
-# ARCHIVE-PUSH SPECIFIC SETTINGS
+# ARCHIVE-PUSH SETTINGS
 # ============================================================
 
 [global:archive-push]
 
-# Parallel processes for WAL archive-push
+# Parallel workers for WAL archive-push
 process-max=2

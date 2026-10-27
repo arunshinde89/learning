@@ -1,3 +1,4 @@
+```ini
 # ============================================================
 # pgBackRest Configuration - Example
 # PostgreSQL Version : 18
@@ -114,3 +115,4 @@ spool-path=/var/spool/pgbackrest
 
 # Parallel workers for WAL archive-push
 process-max=2
+```

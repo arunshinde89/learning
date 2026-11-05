@@ -246,7 +246,7 @@ cd /oracle/oms_base
 nohup tar --acls --xattrs --selinux --numeric-owner \
 -czpf /oracle/oms_bip/Patch/BACKUP/OEM24AI_PREPATCH.tar.gz em \
 > /oracle/oms_bip/Patch/BACKUP/OEM24AI_PREPATCH.log 2>&1 &
-em
+
 ```
 
 This includes:
